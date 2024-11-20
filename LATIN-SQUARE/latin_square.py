@@ -19,7 +19,6 @@ def backtrack(matrix, n, cell_index, max_depth, used_rows, used_cols, empty_cell
             if backtrack(matrix, n, cell_index + 1, max_depth, used_rows, used_cols, empty_cells):
                 return True
 
-            # Undo the placement
             matrix[row][col] = 0
             used_rows[row][num] = False
             used_cols[col][num] = False
@@ -27,13 +26,11 @@ def backtrack(matrix, n, cell_index, max_depth, used_rows, used_cols, empty_cell
     return False
 
 def iddfs_latin_square(n):
-    print("\nStarting the Latin Square Solver...")
     matrix = [[0] * n for _ in range(n)]
     used_rows = [[False] * (n + 1) for _ in range(n)]
     used_cols = [[False] * (n + 1) for _ in range(n)]
     empty_cells = [(row, col) for row in range(n) for col in range(n)]
 
-    # Pre-fill diagonals for better efficiency
     for i in range(n):
         matrix[i][i] = i + 1
         used_rows[i][i + 1] = True
@@ -67,7 +64,6 @@ def main():
 
         iddfs_latin_square(square_number)
 
-        # Ask if the user wants to solve another square
         try_again = input("\nSolve another Latin square? (y/n): ").strip().lower()
         if try_again not in ["yes", "y"]:
             print("\nExiting!!")
